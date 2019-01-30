@@ -1,25 +1,30 @@
 import React, {Component} from 'react';
-import idGenerator from 'react-id-generator';
-
 import AppHeader from '../app-header';
 import SearchPanel from '../search-panel';
 import PostStatusFilter from '../post-status-filter';
 import PostList from '../post-list';
 import PostAddForm from '../post-add-form';
-
+import idGenerator from 'react-id-generator';
 import './app.css'
+
+let data = [
+    1,
+    [0,1],
+    {label: 'Going to learn React', important: true, like: false, id: idGenerator()},
+    {label: 'That is so good', important: false, like: false, id: idGenerator()},
+    {label: 'I need a break...', important: false, like: false, id: idGenerator()}
+];
+
+data = data.filter((item) => {
+    return (typeof item === 'object' && item != null && item instanceof Array !== true);
+});
 
 export default class App extends Component {
 
     constructor (props) {
         super(props);
         this.state = {
-            data: [
-                {label: 'Going to learn React', important: true, like: false, id: idGenerator()},
-                {label: 'That is so good', important: false, like: false, id: idGenerator()},
-                {label: 'I need a break...', important: false, like: false, id: idGenerator()}
-            ],
-
+            data,
             term: '',
             filter: 'all'
         }
